@@ -1,10 +1,11 @@
 import { ApiError, ErrorMessage, WeatherInfoContainer} from "./styles";
+import type { WeatherInfoErrorProps } from "./types";
 
-function WeatherInfoError() {
+function WeatherInfoError({message}:WeatherInfoErrorProps) {
   return (
     <WeatherInfoContainer>
       <ApiError>API Error</ApiError>
-      <ErrorMessage>Something went wrong with API data</ErrorMessage>
+      <ErrorMessage>{message}</ErrorMessage>
     </WeatherInfoContainer>
   )
 }
