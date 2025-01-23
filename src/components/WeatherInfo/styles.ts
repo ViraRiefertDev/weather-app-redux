@@ -5,9 +5,8 @@ export const WeatherBlock = styled.div`
   flex-direction:column;
   justify-content: center;
   align-items:center;
-  gap:16px;
   min-width:710px;
-  min-height: 180px;
+  max-height: 180px;
   padding: 22px 36px;
   background-color: rgba(47, 72, 111, 0.62);
   backdrop-filter: blur(3px);
@@ -16,10 +15,10 @@ export const WeatherBlock = styled.div`
 
 export const WeatherInfoContainer = styled.div`
   display: flex;
-  gap: 80px;
+  gap: 250px;
   min-width:710px;
-  min-height: 180px;
-  padding: 22px 36px 0 36px;
+  max-height: 180px;
+  padding: 10px 36px 0 36px;
 
 `;
 

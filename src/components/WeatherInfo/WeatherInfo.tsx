@@ -13,10 +13,17 @@ import type { WeatherInfoProps } from "./types"
 import { useAppDispatch } from "../../store/hooks"
 import { weatherSliceActions } from "../../store/redux/weather/weatherSlice"
 
-function WeatherInfo({ temp, city, icon, isHistory = true }: WeatherInfoProps) {
+function WeatherInfo({id, temp, city, icon, isHistory = true }: WeatherInfoProps) {
   const dispatch = useAppDispatch()
   const saveDataInHistory = () => {
     dispatch(weatherSliceActions.safeDataInHistory())
+  }
+  const onCardDeleteClick = () =>{
+    dispatch(weatherSliceActions.deleteCurrentWeather())
+  }
+
+  const onHistoryCardDeleteClick = () =>{
+    dispatch(weatherSliceActions.deleteHistoryCard(id));
   }
   return (
     <WeatherBlock>
@@ -34,12 +41,12 @@ function WeatherInfo({ temp, city, icon, isHistory = true }: WeatherInfoProps) {
       {!isHistory && (
         <ButtonsWrapper>
           <Button name="Save" onClick={saveDataInHistory} />
-          <Button name="Delete" />
+          <Button name="Delete" onClick={onCardDeleteClick}/>
         </ButtonsWrapper>
       )}
       {isHistory && (
         <ButtonsWrapper>
-          <Button name="Delete" />
+          <Button name="Delete" onClick={onHistoryCardDeleteClick}/>
         </ButtonsWrapper>
       )}
     </WeatherBlock>

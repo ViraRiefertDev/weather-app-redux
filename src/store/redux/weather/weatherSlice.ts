@@ -1,16 +1,18 @@
-import axios, { AxiosError } from "axios"
+import axios from "axios"
 import { createAppSlice } from "../../createAppSlice"
 import type { WeatherSliceState } from "./types"
-import { W } from "vitest/dist/reporters-yx5ZTtEV.js"
+import { v4 } from "uuid"
+import type { PayloadAction } from "@reduxjs/toolkit"
 
 const API_KEY = "68d1ff1a7a5bc8351bf4a817fd203e1d"
 
 const weatherInitialState: WeatherSliceState = {
   data: {
     weatherData: {
-      temp: -1,
-      city: "",
-      icon: "",
+      id: '',
+      temp: undefined,
+      city: undefined,
+      icon: undefined,
     },
     historyWeatherData: [],
   },
@@ -47,6 +49,7 @@ export const weatherSlice = createAppSlice({
         fulfilled: (state: WeatherSliceState, action: any) => {
           state.status = "success"
           state.data.weatherData = {
+            id:v4(),
             temp: Math.round(action.payload.main.temp - 273.15),
             city: action.payload.name,
             icon: `http://openweathermap.org/img/w/${action.payload.weather[0].icon}.png`,
@@ -58,12 +61,24 @@ export const weatherSlice = createAppSlice({
         },
       },
     ),
+    deleteCurrentWeather: create.reducer((state:WeatherSliceState)=> {
+      state.data.weatherData = weatherInitialState.data.weatherData
+      state.status='default'
+    }),
     safeDataInHistory: create.reducer((state: WeatherSliceState) => {
       state.data.historyWeatherData = [
         ...state.data.historyWeatherData,
         state.data.weatherData,
       ]
+      state.status='default'
     }),
+    deleteHistoryCard:create.reducer((state:WeatherSliceState, action:PayloadAction<string>)=>{
+      state.data.historyWeatherData=state.data.historyWeatherData.filter(card => card.id !== action.payload)
+    }),
+    deleteAllHistoryCard:create.reducer((state:WeatherSliceState)=>{
+      state.data.historyWeatherData = []
+    })
+
   }),
 
   selectors: {

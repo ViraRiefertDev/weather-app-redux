@@ -11,6 +11,8 @@ import {
   weatherSliceActions,
   weatherSliceSelectors,
 } from "../../store/redux/weather/weatherSlice"
+import { v4 } from "uuid"
+import Spinner from "components/Spinner/Spinner"
 
 function Home() {
   const dispatch = useAppDispatch()
@@ -25,15 +27,20 @@ function Home() {
   }
 
   const onSearchClick = () => {
-    dispatch(weatherSliceActions.getWeatherData(inputValue))
-    console.log(error)
+    if (inputValue === "") {
+      alert("Enter city name!")
+    } else {
+      dispatch(weatherSliceActions.getWeatherData(inputValue))
+      setInputValue("")
+    }
   }
-  
+
   return (
     <HomePageWrapper>
       <InputContainer>
         <Input
           name="input-data"
+          value={inputValue}
           placeholder="Colrado"
           onChange={onInputChange}
         />
@@ -41,10 +48,17 @@ function Home() {
           <Button name="Search" onClick={onSearchClick} />
         </ButtonWrapper>
       </InputContainer>
+      {status === "loading" && <Spinner />}
       {status === "success" && (
-        <WeatherInfo temp={temp} city={city} icon={icon} isHistory={false} />
+        <WeatherInfo
+          id={v4()}
+          temp={temp}
+          city={city}
+          icon={icon}
+          isHistory={false}
+        />
       )}
-      {status === "error" && <WeatherInfoError message={error}/>}
+      {status === "error" && <WeatherInfoError message={error} />}
     </HomePageWrapper>
   )
 }

@@ -1,6 +1,7 @@
 export interface WeatherInfoProps{
-  temp:number,
-  city:string,
-  icon:string,
+  id:string,
+  temp:number|undefined,
+  city:string|undefined,
+  icon:string|undefined,
   isHistory?:boolean,
 }
