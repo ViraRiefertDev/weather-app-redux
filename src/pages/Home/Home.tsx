@@ -60,7 +60,7 @@ function Home() {
           isHistory={false}
         />
       )}
-      {status === "error"  && <WeatherInfoError message={error}/>}
+      {status === "error"  && <WeatherInfoError error={error}/>}
     </HomePageWrapper>
   )
 }

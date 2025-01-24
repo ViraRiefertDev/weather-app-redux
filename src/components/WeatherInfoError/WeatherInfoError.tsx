@@ -9,7 +9,8 @@ import type { WeatherInfoErrorProps } from "./types"
 import { useAppDispatch } from "store/hooks"
 import { weatherSliceActions } from "store/redux/weather/weatherSlice"
 
-function WeatherInfoError({ message}: WeatherInfoErrorProps) {
+function WeatherInfoError({ error}: WeatherInfoErrorProps) {
+  const {code, message} = error;
   const dispatch =useAppDispatch()
   const onDeleteButtonClick =()=>{
     dispatch(weatherSliceActions.deleteErrorInfo())
@@ -17,7 +18,7 @@ function WeatherInfoError({ message}: WeatherInfoErrorProps) {
 
   return (
     <WeatherInfoContainer>
-      <ApiError>API Error</ApiError>
+      <ApiError>{code}</ApiError>
       <ErrorMessage>{message}</ErrorMessage>
       <ButtonsWrapper>
         <Button name="Delete" onClick={onDeleteButtonClick} />

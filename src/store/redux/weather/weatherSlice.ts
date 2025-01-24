@@ -3,7 +3,6 @@ import { createAppSlice } from "../../createAppSlice"
 import type { WeatherSliceState } from "./types"
 import { v4 } from "uuid"
 import type { PayloadAction } from "@reduxjs/toolkit"
-import { error } from "console"
 
 const API_KEY = "68d1ff1a7a5bc8351bf4a817fd203e1d"
 
@@ -17,7 +16,7 @@ const weatherInitialState: WeatherSliceState = {
     },
     historyWeatherData: [],
   },
-  error: undefined,
+  error: {code:undefined, message:undefined},
   status: "default",
 }
 
@@ -35,7 +34,8 @@ export const weatherSlice = createAppSlice({
         } catch (error: unknown) {
           if(axios.isAxiosError(error)){
           return thunkApi.rejectWithValue(
-            `${error.response?.data.cod}: ${error.response?.data.message}`,
+            /* `${error.response?.data.cod}: ${error.response?.data.message}`, */
+            {code: error.response?.data.cod, message:error.response?.data.message}
           )}
           else{
             return('Unknown error')
@@ -45,7 +45,7 @@ export const weatherSlice = createAppSlice({
       {
         pending: (state: WeatherSliceState) => {
           state.status = "loading"
-          state.error = undefined
+          state.error = weatherInitialState.error
         },
         fulfilled: (state: WeatherSliceState, action: any) => {
           state.status = "success"
@@ -80,7 +80,7 @@ export const weatherSlice = createAppSlice({
       state.data.historyWeatherData = []
     }),
     deleteErrorInfo: create.reducer((state:WeatherSliceState)=>{
-      state.error= undefined
+      state.error= weatherInitialState.error
       state.status='default'
     })
 

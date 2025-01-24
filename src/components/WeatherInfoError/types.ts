@@ -1,4 +1,3 @@
-export interface WeatherInfoErrorProps{
-  message:string;
-
+export interface WeatherInfoErrorProps {
+  error: { code: string | undefined; message: string | undefined }
 }
