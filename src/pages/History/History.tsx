@@ -1,4 +1,4 @@
-import { ButtonContainer, HistoryPageWrapper, WeatherCards } from "./styles"
+import { ButtonContainer, HistoryPageWrapper, NoSavedData, WeatherCards } from "./styles"
 import { useAppSelector, useAppDispatch } from "../../store/hooks"
 import {
   weatherSliceSelectors,
@@ -11,7 +11,7 @@ import Button from "components/Button/Button"
 
 function History() {
   const { data } = useAppSelector(weatherSliceSelectors.weatherData)
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
   const onDeleteAllCards = () => {
     dispatch(weatherSliceActions.deleteAllHistoryCard())
   }
@@ -27,12 +27,19 @@ function History() {
   })
   return (
     <HistoryPageWrapper key={v4()}>
-      <WeatherCards>{history}</WeatherCards>
+      {data.historyWeatherData.length === 0 && (
+        <NoSavedData>No Saved Data!</NoSavedData>
+      )}
       {data.historyWeatherData.length > 0 && (
         <ButtonContainer>
-          <Button name="Delete all cards" onClick={onDeleteAllCards}/>
+          <Button
+            name="Delete all cards"
+            onClick={onDeleteAllCards}
+            isWeatherCard={false}
+          />
         </ButtonContainer>
       )}
+      <WeatherCards>{history}</WeatherCards>
     </HistoryPageWrapper>
   )
 }

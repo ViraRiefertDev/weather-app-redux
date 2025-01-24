@@ -6,7 +6,7 @@ function Button({
   children,
   type = "button",
   onClick,
-  disabled = false,
+  isWeatherCard = true,
   buttonWidth = "100%",
 }: ButtonProps) {
   return (
@@ -14,7 +14,7 @@ function Button({
       buttonWidth={buttonWidth}
       type={type}
       onClick={onClick}
-      disabled={disabled}
+      isWeatherCard={isWeatherCard}
     >
       {name}
       {children}

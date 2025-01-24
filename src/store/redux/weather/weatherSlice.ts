@@ -3,6 +3,7 @@ import { createAppSlice } from "../../createAppSlice"
 import type { WeatherSliceState } from "./types"
 import { v4 } from "uuid"
 import type { PayloadAction } from "@reduxjs/toolkit"
+import { error } from "console"
 
 const API_KEY = "68d1ff1a7a5bc8351bf4a817fd203e1d"
 
@@ -77,6 +78,10 @@ export const weatherSlice = createAppSlice({
     }),
     deleteAllHistoryCard:create.reducer((state:WeatherSliceState)=>{
       state.data.historyWeatherData = []
+    }),
+    deleteErrorInfo: create.reducer((state:WeatherSliceState)=>{
+      state.error= undefined
+      state.status='default'
     })
 
   }),

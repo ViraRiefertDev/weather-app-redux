@@ -1,7 +1,7 @@
 import { useState } from "react"
 import type { ChangeEvent } from "react"
 
-import Input from "../../components/Input/Input"
+import Input from "components/Input/Input"
 import WeatherInfo from "../../components/WeatherInfo/WeatherInfo"
 import WeatherInfoError from "../../components/WeatherInfoError/WeatherInfoError"
 import { ButtonWrapper, HomePageWrapper, InputContainer } from "./styles"
@@ -21,6 +21,7 @@ function Home() {
   )
   const { temp, city, icon } = data.weatherData
   const [inputValue, setInputValue] = useState<string>("")
+  
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value)
@@ -35,6 +36,7 @@ function Home() {
     }
   }
 
+
   return (
     <HomePageWrapper>
       <InputContainer>
@@ -45,7 +47,7 @@ function Home() {
           onChange={onInputChange}
         />
         <ButtonWrapper>
-          <Button name="Search" onClick={onSearchClick} />
+          <Button name="Search" onClick={onSearchClick} isWeatherCard = {false} />
         </ButtonWrapper>
       </InputContainer>
       {status === "loading" && <Spinner />}
@@ -58,7 +60,7 @@ function Home() {
           isHistory={false}
         />
       )}
-      {status === "error" && <WeatherInfoError message={error} />}
+      {status === "error"  && <WeatherInfoError message={error}/>}
     </HomePageWrapper>
   )
 }

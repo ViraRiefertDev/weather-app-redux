@@ -25,3 +25,14 @@ export const WeatherCards = styled.div`
 export const ButtonContainer = styled.div`
   width:782px;
 `
+export const NoSavedData = styled.div`
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding:30px;
+  background-color: rgba(18, 45, 77, 0.8);
+  color:#fff;
+  font-weight:900;
+  font-size:35px;
+  border-radius: 30px;
+`

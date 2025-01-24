@@ -6,7 +6,7 @@ export const WeatherInfoContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-width: 710px;
-  height: 180px;
+  min-height: 180px;
   padding: 22px 36px;
   background-color: rgba(47, 72, 111, 0.62);
   backdrop-filter: blur(3px);
@@ -24,6 +24,12 @@ export const ErrorMessage = styled.div`
   font-size: 18px;
   color:white;
 `
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  gap:95px;
+  width:155px;
+  margin:30px 0 0 0;
 
-/*  <ApiError>API Error</ApiError>
-      <ErrorMessage>Something went wrong with API data</ErrorMessage> */
+`
+

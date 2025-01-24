@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 
 type ButtonType = 'submit'| 'button' | 'reset'
 
@@ -7,6 +7,6 @@ export interface ButtonProps{
   children?: ReactNode;
   type?:ButtonType;
   onClick?: () => void;
-  disabled?:boolean;
+  isWeatherCard?:boolean;
   buttonWidth?: string;
 }
