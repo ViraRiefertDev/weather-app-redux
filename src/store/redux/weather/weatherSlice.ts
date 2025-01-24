@@ -34,7 +34,6 @@ export const weatherSlice = createAppSlice({
         } catch (error: unknown) {
           if(axios.isAxiosError(error)){
           return thunkApi.rejectWithValue(
-            /* `${error.response?.data.cod}: ${error.response?.data.message}`, */
             {code: error.response?.data.cod, message:error.response?.data.message}
           )}
           else{

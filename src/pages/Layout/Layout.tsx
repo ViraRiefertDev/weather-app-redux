@@ -23,14 +23,14 @@ function Layout({ children }: LayoutProps) {
         <NavContainer>
           <StyledNavLink
             style={({ isActive }) => ({
-              textDecoration: isActive ? "underline" : "none",
+              fontWeight: isActive ? "900" : "500",
             })}
             to="/"
           >
             Home
           </StyledNavLink>
           <StyledNavLink style={({ isActive }) => ({
-              textDecoration: isActive ? "underline" : "none",
+              fontWeight: isActive ? "900" : "500",
             })}
             to="/history">History</StyledNavLink>
         </NavContainer>

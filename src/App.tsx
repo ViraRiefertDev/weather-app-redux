@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home/Home"
 import History from "./pages/History/History"
 import Layout from "./pages/Layout/Layout"
+import PageNotFound from "pages/PageNotFound/PageNotFound"
 const App = () => {
   return (
     <BrowserRouter>
@@ -10,7 +11,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/history" element={<History />} />
-          <Route path='*' element='Page not found'/>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </Layout>
     </BrowserRouter>
